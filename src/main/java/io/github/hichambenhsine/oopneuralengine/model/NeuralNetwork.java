@@ -1,5 +1,6 @@
 package io.github.hichambenhsine.oopneuralengine.model;
 
+import io.github.hichambenhsine.oopneuralengine.aspect.Secured;
 import io.github.hichambenhsine.oopneuralengine.layer.Layer;
 import io.github.hichambenhsine.oopneuralengine.observer.NetworkEvent;
 import io.github.hichambenhsine.oopneuralengine.observer.NetworkObserver;
@@ -49,14 +50,17 @@ public class NeuralNetwork {
         currentState.addLayer(this, layer);
     }
 
+    @Secured(roles = {"ADMIN", "TRAINER"})
     public void train() {
         currentState.train(this);
     }
 
+    @Secured(roles = {"ADMIN", "TRAINER"})
     public void fit() {
         currentState.fit(this);
     }
 
+    @Secured(roles = {"ADMIN", "TRAINER", "USER"})
     public double[] predict(double[] input) {
         return currentState.predict(this, input);
     }
