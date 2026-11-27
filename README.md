@@ -196,3 +196,9 @@ Run the end-to-end demonstration (including the 3-5-2 fully-connected topology):
 ```bash
 mvn clean compile exec:java -Dexec.mainClass="io.github.hichambenhsine.oopneuralengine.Main"
 ```
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
