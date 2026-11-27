@@ -3,10 +3,13 @@ package io.github.hichambenhsine.oopneuralengine.builder;
 import io.github.hichambenhsine.oopneuralengine.activation.IdentityActivation;
 import io.github.hichambenhsine.oopneuralengine.activation.SigmoidActivation;
 import io.github.hichambenhsine.oopneuralengine.activation.SoftMaxActivation;
+import io.github.hichambenhsine.oopneuralengine.aspect.SecurityContext;
 import io.github.hichambenhsine.oopneuralengine.layer.decorator.NormalizationLayerDecorator;
 import io.github.hichambenhsine.oopneuralengine.model.NeuralNetwork;
 import io.github.hichambenhsine.oopneuralengine.observer.NetworkDashboard;
 import io.github.hichambenhsine.oopneuralengine.state.NetworkStateType;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,6 +17,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class NeuralNetworkBuilderTest {
 
     private static final double DELTA = 1e-6;
+
+    @BeforeEach
+    void authenticate() {
+        SecurityContext.login("test-admin", "ADMIN");
+    }
+
+    @AfterEach
+    void cleanup() {
+        SecurityContext.clear();
+    }
 
     @Test
     void builderShouldConstructFigure11_1Topology3_5_2AndPredict() {

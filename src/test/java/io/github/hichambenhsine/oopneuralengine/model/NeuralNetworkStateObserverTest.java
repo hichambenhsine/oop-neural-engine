@@ -1,6 +1,7 @@
 package io.github.hichambenhsine.oopneuralengine.model;
 
 import io.github.hichambenhsine.oopneuralengine.activation.IdentityActivation;
+import io.github.hichambenhsine.oopneuralengine.aspect.SecurityContext;
 import io.github.hichambenhsine.oopneuralengine.layer.Layer;
 import io.github.hichambenhsine.oopneuralengine.layer.LayerFactory;
 import io.github.hichambenhsine.oopneuralengine.layer.LayerType;
@@ -8,6 +9,8 @@ import io.github.hichambenhsine.oopneuralengine.observer.NetworkDashboard;
 import io.github.hichambenhsine.oopneuralengine.observer.NetworkEvent;
 import io.github.hichambenhsine.oopneuralengine.state.NetworkStateType;
 import io.github.hichambenhsine.oopneuralengine.state.TrainingState;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -17,6 +20,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class NeuralNetworkStateObserverTest {
 
     private static final double DELTA = 1e-6;
+
+    @BeforeEach
+    void authenticate() {
+        SecurityContext.login("test-admin", "ADMIN");
+    }
+
+    @AfterEach
+    void cleanup() {
+        SecurityContext.clear();
+    }
 
     private NeuralNetwork createSimpleNetwork() {
         LayerFactory factory = new LayerFactory();
